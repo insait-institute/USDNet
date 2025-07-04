@@ -1,0 +1,10 @@
+# @package data
+
+train_collation:
+  _target_: datasets.connectivity.ConnectivityCollate
+
+validation_collation:
+  _target_: datasets.connectivity.ConnectivityCollate
+
+test_collation:
+  _target_: datasets.connectivity.ConnectivityCollate

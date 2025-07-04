@@ -1,0 +1,39 @@
+general:
+  train_mode: true
+  task: "connectivity_prediction"
+  seed: null
+  checkpoint: null
+  backbone_checkpoint: null
+  interaction_backbone_checkpoint: null
+  freeze_backbone: false # train only last layer
+  filter_out_instances: false
+  project_name: connectivity_prediction
+  workspace: y9miao
+  experiment_name: DEBUG_ABLATION
+  reps_per_epoch: 1
+
+  max_batch_size: 99999999
+
+  save_dir: saved/${general.experiment_name}
+
+  gpus: 1
+  
+defaults:
+  - data: indoor_connectivity
+  - data/data_loaders: simple_loader
+  - data/datasets: articulate3d_connectivity_trainval
+  - data/collation_functions: voxelize_connectivity_collate
+  - callbacks: callbacks_connectivity_prediction
+  - logging: full
+  - model: connectivity3d
+  - optimizer: adamw
+  - scheduler: onecyclelr
+  - trainer: trainer_connectivity
+
+hydra:
+  run:
+    dir: saved/hydra_logs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: saved/hydra_logs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    # dir: ${general.save_dir}
+    subdir: ${hydra.job.num}_${hydra.job.id}

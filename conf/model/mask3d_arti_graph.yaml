@@ -1,0 +1,62 @@
+# @package _group_
+_target_: models.Mask3D
+
+# transformer parameters
+hidden_dim: 128
+dim_feedforward: 1024
+num_queries: 150
+num_heads: 8
+num_decoders: 3
+dropout: 0.0
+pre_norm: false
+use_level_embed: false
+normalize_pos_enc: true
+positional_encoding_type: "fourier"
+gauss_scale: 1.0
+hlevels: [0,1,2,3]
+
+# queries
+non_parametric_queries: true
+random_query_both: false
+random_normal: false
+random_queries: false
+use_np_features: false
+pred_mov_centers: false
+# articulation
+predict_articulation: false
+predict_articulation_mode: 0
+articulation_type_mapping:
+  rotation: 1
+  translation: 2
+reserve_arti_net: false
+pointwise_origin: True
+pointwise_axis: True
+# interaction prediction
+predict_hierarchy_interaction: false
+predict_hierarchy_interaction_mode: 0
+predict_interaction_centers: false
+use_interaction_queries: false
+mov_inter_couple: false
+# sampling
+sample_sizes: [200, 800, 3200, 12800, 51200]
+max_sample_size: false # change false means sampling activated
+
+shared_decoder: true
+num_classes: 4
+train_on_segments: false
+scatter_type: "mean"
+
+voxel_size: 0.02
+
+config:
+  backbone:
+    _target_: models.Res16UNet34C
+    config:
+      dialations: [ 1, 1, 1, 1 ]
+      conv1_kernel_size: 5
+      bn_momentum: 0.02
+    # depends on normals, color, raw_coordinates
+    # varies from 3 to 9
+    in_channels: ${data.in_channels}
+    out_channels: ${data.num_labels}
+    out_fpn: true

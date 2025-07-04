@@ -1,0 +1,21 @@
+# @package _group_
+
+# these parameters are inherited by datasets, data_loaders and collators
+# but they might be overwritten
+
+# splits
+train_mode: train
+validation_mode: validation
+test_mode: validation # test  # validation
+
+# dataset
+task: ${general.task}
+
+# data loader
+pin_memory: false
+num_workers: 4
+batch_size: 4
+test_batch_size: 1
+cache_data: false
+
+reps_per_epoch: ${general.reps_per_epoch}

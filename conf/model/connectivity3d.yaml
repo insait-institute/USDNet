@@ -1,0 +1,13 @@
+# @package _group_
+_target_: models.Connectivity3D
+
+# transformer parameters
+pt_out_dim: 256
+emb_dim: 256
+gnn_channels: [256, 128, 128]
+gat_heads: [2, 2]
+connect_dim: 256
+gnn_type: 'gat'
+
+config:
+  backbone: "PointNet"

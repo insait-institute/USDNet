@@ -1,0 +1,10 @@
+# @package data
+
+train_collation:
+  _target_: datasets.arti_graph.VoxelizeGraphCollate
+
+validation_collation:
+  _target_: datasets.arti_graph.VoxelizeGraphCollate
+
+test_collation:
+  _target_: datasets.arti_graph.VoxelizeGraphCollate

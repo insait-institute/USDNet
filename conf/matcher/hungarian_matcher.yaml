@@ -1,0 +1,12 @@
+# @package _group_
+_target_: models.matcher.HungarianMatcher
+cost_class: 2.
+cost_mask: 5.
+cost_dice: 2.
+cost_origin: 1.
+cost_axis: 1.
+cost_ce_inter_mask: 2.
+cost_dice_inter_mask: 2.
+cost_inter_centers: 1.
+cost_mov_centers: 1.
+num_points: -1
